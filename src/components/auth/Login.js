@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Registration extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
       password: "",
-      password_confirmation: "",
-      registrationErrors: ""
+      loginErrors: ""
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,21 +24,19 @@ class Registration extends Component {
     handleSubmit(event) {
       const {
         email,
-        password,
-        password_confirmation
+        password
       } = this.state;
 
       console.log("form submitted");
-      axios.post("http://localhost:3001/users", {
+      axios.post("http://localhost:3001/sessions", {
         user: {
           email: email,
-          password: password,
-          password_confirmation: password_confirmation
+          password: password
         }
       },
       { withCredentials: true }
     ).then(response => {
-      console.log("registration res", response);
+      if
     }).catch(error => {
       console.log("registration error", error);
     })
@@ -68,20 +65,11 @@ class Registration extends Component {
           required
         />
 
-        <input
-          type="password_confirmation"
-          name="password_confirmation"
-          placeholder="Password Confirmation"
-          value={this.state.password_confirmation}
-          onChange={this.handleChange}
-          required
-        />
-
-        <button type="submit">Register</button>
+        <button type="submit">Log In</button>
         </form>
       </div>
     );
   }
 }
 
-export default Registration;
+export default Login;
