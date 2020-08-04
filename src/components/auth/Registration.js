@@ -70,7 +70,7 @@ class Registration extends Component {
         />
 
         <input
-          type="password_confirmation"
+          type="password"
           name="password_confirmation"
           placeholder="Password Confirmation"
           value={this.state.password_confirmation}
