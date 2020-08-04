@@ -29,16 +29,16 @@ class Login extends Component {
 
       console.log("form submitted");
       axios.post("http://localhost:3001/sessions", {
-        user: {
-          email: email,
-          password: password
-        }
+        email: email,
+        password: password
       },
       { withCredentials: true }
     ).then(response => {
-      if
+      if (response.data.logged_in) {
+        this.props.handleSuccessfulAuth(response.data);
+      }
     }).catch(error => {
-      console.log("registration error", error);
+      console.log("login error", error);
     })
   event.preventDefault();
   }

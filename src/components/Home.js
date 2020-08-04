@@ -3,9 +3,15 @@ import Registration from "./auth/Registration";
 import Login from "./auth/Login";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSuccessfulAuth =this.handleSuccessfulAuth.bind(this);
+  }
 
   handleSuccessfulAuth(data) {
     this.props.handleLogin(data);
+    this.props.history.push("/");
   };
 
   render() {
@@ -14,7 +20,7 @@ class Home extends Component {
         <h1>Home</h1>
         <h3>Status: { this.props.loggedInStatus }</h3>
         <Registration handleSuccessfulAuth={ this.handleSuccessfulAuth } />
-        <Login />
+        <Login handleSuccessfulAuth={ this.handleSuccessfulAuth } />
       </div>
     );
   }

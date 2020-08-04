@@ -30,16 +30,17 @@ class Registration extends Component {
       } = this.state;
 
       console.log("form submitted");
-      axios.post("http://localhost:3001/users", {
-        user: {
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation
-        }
+      axios.post("http://localhost:3001/registrations", {
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation
       },
       { withCredentials: true }
     ).then(response => {
       console.log("registration res", response);
+      if (response.data.status === "created") {
+        this.props.handleSuccessfulAuth(response.data);
+      }
     }).catch(error => {
       console.log("registration error", error);
     })
