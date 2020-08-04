@@ -6,8 +6,8 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      email: "",
-      password: "",
+      email: "carolisperfect@hotmail.com",
+      password: "beef",
       loginErrors: ""
     }
 
@@ -34,6 +34,7 @@ class Login extends Component {
       },
       { withCredentials: true }
     ).then(response => {
+      console.log(response);
       if (response.data.logged_in) {
         this.props.handleSuccessfulAuth(response.data);
       }

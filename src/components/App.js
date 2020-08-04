@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Home from "./Home";
+import AllRoutes from "./routes/AllRoutes";
 
 
 
@@ -42,6 +43,7 @@ class App extends Component {
 
 
   handleLogin(data) {
+    console.log(data)
     this.setState({
       loggedInStatus: "LOGGED_IN",
       user: data.user
@@ -59,6 +61,27 @@ class App extends Component {
     return(
       <div className="App">
         <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/routes">Tickets & Trips</Link>
+                </li>
+                <li>
+                  <Link to="/trips">Day Trips</Link>
+                </li>
+                <li>
+                  <Link to="/guide">Guide to Australia</Link>
+                </li>
+                <li>
+                  <Link to="/how-it-works">How it works?</Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
           <Switch>
             <Route
               exact
@@ -69,6 +92,16 @@ class App extends Component {
                   handleLogin={ this.handleLogin }
                   handleLogout={ this.handleLogout }
                   loggedInStatus={ this.state.loggedInStatus } />
+              )}
+            />
+            <Route
+              exact
+              path={"/routes"}
+              render={props => (
+                <AllRoutes
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
               )}
             />
           </Switch>
