@@ -3,6 +3,8 @@ import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Home from "./Home";
 import AllRoutes from "./routes/AllRoutes";
+import AllTrips from "./trips/AllTrips";
+import AllCities from "./guides/AllCities";
 
 
 
@@ -71,10 +73,10 @@ class App extends Component {
                   <Link to="/routes">Tickets & Trips</Link>
                 </li>
                 <li>
-                  <Link to="/trips">Day Trips</Link>
+                  <Link to="/day-trips">Day Trips</Link>
                 </li>
                 <li>
-                  <Link to="/guide">Guide to Australia</Link>
+                  <Link to="/guide-to-Australia">Guide to Australia</Link>
                 </li>
                 <li>
                   <Link to="/how-it-works">How it works?</Link>
@@ -99,6 +101,29 @@ class App extends Component {
               path={"/routes"}
               render={props => (
                 <AllRoutes
+                  {...props}
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
+              path={"/day-trips"}
+              render={props => (
+                <AllTrips
+                  {...props}
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
+              path={"/guide-to-Australia"}
+              render={props => (
+                <AllCities
+                  {...props}
                   handleLogout={this.handleLogout}
                   {...this.state}
                   loggedInStatus={this.state.isLoggedIn} />
