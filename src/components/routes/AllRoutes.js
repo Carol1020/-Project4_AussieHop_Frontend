@@ -22,11 +22,21 @@ const AllRoutes = function () {
 
   return (
     <div>
-      <ul>
-        {
-          routes.map(route => <li key={ route.id }>{ route.title }</li>)
-        }
-      </ul>
+      <h1>Tickets & Trips</h1>
+      {
+        routes.map(route =>
+          <div key={ route.id }>
+            <h3>Route { route.id }: { route.start }-{ route.end } { route.stops[0].stopType }</h3>
+            <p>From: { route.start }</p>
+            <p>To: { route.end }</p>
+            <p>Number of Stops: { route.numOfStops }</p>
+            <p>Minimum time: { route.durationInDays } Days</p>
+            <p>Price: ${ route.price }</p>
+            <p>Trip Type: { route.stops[0].stopType }</p>
+            <button>MORE INFO</button>
+          </div>
+        )
+      }
     </div>
   );
 };
