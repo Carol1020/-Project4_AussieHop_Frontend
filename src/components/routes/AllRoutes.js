@@ -41,7 +41,7 @@ const AllRoutes = function () {
             <p>Minimum time: { durationInDays } Days</p>
             <p>Price: ${ price }</p>
             <p>Trip Type: { stops[0].stopType }</p>
-            <button type="button">MORE INFO</button>
+            <a href={`/route/${id}`}>MORE INFO</a>
             <button type="button" onClick={ handleClick }>BOOK NOW</button>
           </div>
         })

@@ -11,6 +11,7 @@ import Cart from "./carts/Cart";
 
 
 
+
 class App extends Component {
   constructor() {
     super();
@@ -93,17 +94,6 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path={"/"}
-              render={props => (
-                <Home
-                  {...props}
-                  handleLogin={ this.handleLogin }
-                  handleLogout={ this.handleLogout }
-                  loggedInStatus={ this.state.loggedInStatus } />
-              )}
-            />
-            <Route
-              exact
               path={"/routes"}
               render={props => (
                 <AllRoutes
@@ -115,7 +105,7 @@ class App extends Component {
             />
             <Route
               exact
-              path={"/route"}
+              path={"/route/:routeId"}
               render={props => (
                 <RouteView
                   {...props}
@@ -155,6 +145,17 @@ class App extends Component {
                   handleLogout={this.handleLogout}
                   {...this.state}
                   loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
+              path={"/"}
+              render={props => (
+                <Home
+                  {...props}
+                  handleLogin={ this.handleLogin }
+                  handleLogout={ this.handleLogout }
+                  loggedInStatus={ this.state.loggedInStatus } />
               )}
             />
           </Switch>
