@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import _, { uniq } from 'underscore';
 import axios from 'axios';
 // import SearchResults from 'react-filter-search';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const AllRoutes = function () {
@@ -41,7 +41,7 @@ const AllRoutes = function () {
             <p>Minimum time: { durationInDays } Days</p>
             <p>Price: ${ price }</p>
             <p>Trip Type: { stops[0].stopType }</p>
-            <a href={`/route/${id}`}>MORE INFO</a>
+            <Link to={`/route/${id}`}>MORE INFO</Link>
             <button type="button" onClick={ handleClick }>BOOK NOW</button>
           </div>
         })

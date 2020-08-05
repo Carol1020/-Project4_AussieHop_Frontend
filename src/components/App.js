@@ -5,6 +5,7 @@ import Home from "./Home";
 import AllRoutes from "./routes/AllRoutes";
 import RouteView from "./routes/RouteView";
 import AllTrips from "./trips/AllTrips";
+import TripView from "./trips/TripView";
 import AllCities from "./guides/AllCities";
 import Cart from "./carts/Cart";
 
@@ -104,7 +105,6 @@ class App extends Component {
               )}
             />
             <Route
-              exact
               path={"/route/:routeId"}
               render={props => (
                 <RouteView
@@ -115,10 +115,19 @@ class App extends Component {
               )}
             />
             <Route
-              exact
               path={"/day-trips"}
               render={props => (
                 <AllTrips
+                  {...props}
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              path={"/day-trip/:tripId"}
+              render={props => (
+                <TripView
                   {...props}
                   handleLogout={this.handleLogout}
                   {...this.state}

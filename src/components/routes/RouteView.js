@@ -8,28 +8,32 @@ import { Redirect } from 'react-router-dom';
 
 const RouteView = function (props) {
   const [route, setRoute] = useState([]);
-  const routeId = props.match.params.Id
+  const routeId = props.match.params.routeId
 
   useEffect( () => {
-    axios.get(`http://localhost:3001/route/${ routeId }`)
+    axios.get(`http://localhost:3001/routes/${ routeId }`)
       .then(response => {
         console.log(response);
-        setRoute(response.data[0]); // [0] for id
+        setRoute(response.data); // [0] for id
       })
       .catch(error => {
         console.log(error);
       })
   }, []) // fetch data only once
 
+  console.log(route)
+  const { id, image, start, end, stops, numOfStops, durationInDays, price } = route
+  if (!route || !route.stops) return ""
   return (
-    <div key={ route.id }>
-      <h3>{ route.start }-{ route.end } { route.stops[0].stopType }</h3>
-      <p>From: { route.start }</p>
-      <p>To: { route.end }</p>
-      <p>Number of Stops: { route.numOfStops }</p>
-      <p>Minimum time: { route.durationInDays } Days</p>
-      <p>Price: ${ route.price }</p>
-      <p>Trip Type: { route.stops[0].stopType }</p>
+    <div key={ id }>
+      <h3>{ start }-{ end } { stops[0].stopType }</h3>
+      <img src={ image } alt="route" />
+      <p>From: { start }</p>
+      <p>To: { end }</p>
+      <p>Number of Stops: { numOfStops }</p>
+      <p>Minimum time: { durationInDays } Days</p>
+      <p>Price: ${ price }</p>
+      <p>Trip Type: { stops[0].stopType }</p>
       <button type="button" onClick={ route.handleClick }>BOOK NOW</button>
     </div>
   );
