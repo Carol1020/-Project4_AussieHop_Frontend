@@ -7,6 +7,7 @@ import RouteView from "./routes/RouteView";
 import AllTrips from "./trips/AllTrips";
 import TripView from "./trips/TripView";
 import AllCities from "./guides/AllCities";
+import CityView from "./guides/CityView";
 import Cart from "./carts/Cart";
 
 
@@ -125,7 +126,7 @@ class App extends Component {
               )}
             />
             <Route
-              path={"/day-trip/:tripId"}
+              path={"/day-trips/:tripId"}
               render={props => (
                 <TripView
                   {...props}
@@ -139,6 +140,17 @@ class App extends Component {
               path={"/guide-to-Australia"}
               render={props => (
                 <AllCities
+                  {...props}
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
+              path={"/guide-to-Australia/:cityId"}
+              render={props => (
+                <CityView
                   {...props}
                   handleLogout={this.handleLogout}
                   {...this.state}

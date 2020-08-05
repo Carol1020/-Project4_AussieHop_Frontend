@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import _, { uniq } from 'underscore';
 import axios from 'axios';
 // import SearchResults from 'react-filter-search';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const AllCities = function () {
@@ -13,7 +13,7 @@ const AllCities = function () {
     axios.get("http://localhost:3001/stops")
       .then(response => {
         console.log(response);
-        setCities(response.data); // Update the routes
+        setCities(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -28,8 +28,7 @@ const AllCities = function () {
           const { id, name } = city
           return <div key={ id }>
             {/* cities should be shown once */}
-            <h3>{ name }</h3>
-            <button type="button">MORE INFO</button>
+            <Link to={`/guide-to-Australia/${id}`}>{ name }</Link>
           </div>
         })
       }
