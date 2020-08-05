@@ -8,6 +8,12 @@ import { Redirect } from 'react-router-dom';
 const AllTrips = function () {
 
   const [trips, setTrips] = useState([]);
+  const [id, setId] = useState(1);
+  const [idFromButtonClick, setIdFromButtonClick]=useState(1);
+
+  const handleClick = () => {
+    setIdFromButtonClick(id);
+  }
 
   useEffect( () => {
     axios.get("http://localhost:3001/trips")
@@ -30,8 +36,9 @@ const AllTrips = function () {
             <h3>{ name }</h3>
             <p>From: { stops[0].name }</p>
             <p>Duration: { durationInHours }hours</p>
-            <p>Price: { price }</p>
-            <button>MORE INFO</button>
+            <p>Price: ${ price }</p>
+            <button type="button">MORE INFO</button>
+            <button type="button" onClick={ handleClick }>BOOK NOW</button>
           </div>
         })
       }

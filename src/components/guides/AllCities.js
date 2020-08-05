@@ -29,6 +29,7 @@ const AllCities = function () {
           return <div key={ id }>
             {/* cities should be shown once */}
             <h3>{ name }</h3>
+            <button type="button">MORE INFO</button>
           </div>
         })
       }

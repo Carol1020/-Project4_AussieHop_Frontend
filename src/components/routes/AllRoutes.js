@@ -8,6 +8,12 @@ import { Redirect } from 'react-router-dom';
 const AllRoutes = function () {
 
   const [routes, setRoutes] = useState([]);
+  const [id, setId] = useState(1);
+  const [idFromButtonClick, setIdFromButtonClick]=useState(1);
+
+  const handleClick = () => {
+    setIdFromButtonClick(id);
+  }
 
   useEffect( () => {
     axios.get("http://localhost:3001/routes")
@@ -25,16 +31,18 @@ const AllRoutes = function () {
       <h1>Bus Routes</h1>
       {
         routes.map(route => {
-          const { id, start, end, stops, numOfStops, durationInDays, price } = route
+          const { id, image, start, end, stops, numOfStops, durationInDays, price } = route
           return <div key={ id }>
             <h3>{ start }-{ end } { stops[0].stopType }</h3>
+            <img src={ image } alt="route" />
             <p>From: { start }</p>
             <p>To: { end }</p>
             <p>Number of Stops: { numOfStops }</p>
             <p>Minimum time: { durationInDays } Days</p>
             <p>Price: ${ price }</p>
             <p>Trip Type: { stops[0].stopType }</p>
-            <button>MORE INFO</button>
+            <button type="button">MORE INFO</button>
+            <button type="button" onClick={ handleClick }>BOOK NOW</button>
           </div>
         })
       }

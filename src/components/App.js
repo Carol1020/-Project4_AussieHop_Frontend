@@ -3,8 +3,11 @@ import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Home from "./Home";
 import AllRoutes from "./routes/AllRoutes";
+import RouteView from "./routes/RouteView";
 import AllTrips from "./trips/AllTrips";
 import AllCities from "./guides/AllCities";
+import Cart from "./carts/Cart";
+
 
 
 
@@ -81,6 +84,9 @@ class App extends Component {
                 <li>
                   <Link to="/how-it-works">How it works?</Link>
                 </li>
+                <li>
+                  <Link to="/my-cart">My Cart</Link>
+                </li>
               </ul>
             </nav>
           </div>
@@ -109,6 +115,17 @@ class App extends Component {
             />
             <Route
               exact
+              path={"/route"}
+              render={props => (
+                <RouteView
+                  {...props}
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
               path={"/day-trips"}
               render={props => (
                 <AllTrips
@@ -123,6 +140,17 @@ class App extends Component {
               path={"/guide-to-Australia"}
               render={props => (
                 <AllCities
+                  {...props}
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
+              path={"/my-cart"}
+              render={props => (
+                <Cart
                   {...props}
                   handleLogout={this.handleLogout}
                   {...this.state}
