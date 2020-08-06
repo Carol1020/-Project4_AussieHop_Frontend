@@ -17,6 +17,8 @@ import AllTrips from "./trips/AllTrips";
 import TripView from "./trips/TripView";
 import AllCities from "./guides/AllCities";
 import CityView from "./guides/CityView";
+import Registration from "./auth/Registration";
+import Login from "./auth/Login";
 
 
 
@@ -29,8 +31,23 @@ class App extends Component {
       user: {}
     }
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   };
+
+  handleSuccessfulAuth(data) {
+    this.props.handleLogin(data);
+    // this.props.history.push("/");
+  };
+
+  handleLogoutClick() {
+    axios.delete("http://localhost:3001/logout", { withCredentials: true}).then(response => {
+      this.props.handleLogout();
+    }).catch(error => {
+      console.log("logout error", error);
+    })
+  }
 
   checkLoginStatus() {
     axios.get("http://localhost:3001/logged_in", { withCredentials: true }).then(response => {
@@ -71,6 +88,14 @@ class App extends Component {
     })
   }
 
+  handleLogoutClick() {
+    axios.delete("http://localhost:3001/logout", { withCredentials: true}).then(response => {
+      this.props.handleLogout();
+    }).catch(error => {
+      console.log("logout error", error);
+    })
+  }
+
   render() {
 
         return(
@@ -99,6 +124,10 @@ class App extends Component {
                                         <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/sydney/">Sydney</NavDropdown.Item>
                                         <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/melbourne/">Melbourne</NavDropdown.Item>
                                     </NavDropdown>
+                                    { this.state.loggedInStatus === "LOGGED_IN"
+                                      ? <Nav.Link href="/" onClick={() => this.handleLogoutClick()}>Log Out</Nav.Link>
+                                      : (<Nav.Link href="/registration">Registration/Log In</Nav.Link> )
+                                    }
                                     </Nav>
                                     <Form inline>
                                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -108,94 +137,128 @@ class App extends Component {
                             </Navbar>
                             <br />
                             <Container fluid="xl">
-                            <Switch>
-                              <Route
-                                exact
-                                path={"/routes"}
-                                render={props => (
-                                  <AllRoutes
-                                    {...props}
-                                    handleLogout={this.handleLogout}
-                                    {...this.state}
-                                    loggedInStatus={this.state.isLoggedIn} />
-                                )}
-                              />
-                              <Route
-                                path={"/routes/:routeId"}
-                                render={props => (
-                                  <RouteView
-                                    {...props}
-                                    handleLogout={this.handleLogout}
-                                    {...this.state}
-                                    loggedInStatus={this.state.isLoggedIn} />
-                                )}
-                              />
-                              <Route
-                                path={"/timetables/:routeId"}
-                                render={props => (
-                                  <TimeTable
-                                    {...props}
-                                    handleLogout={this.handleLogout}
-                                    {...this.state}
-                                    loggedInStatus={this.state.isLoggedIn} />
-                                )}
-                              />
-                              <Route
-                                exact
-                                path={"/day-trips"}
-                                render={props => (
-                                  <AllTrips
-                                    {...props}
-                                    handleLogout={this.handleLogout}
-                                    {...this.state}
-                                    loggedInStatus={this.state.isLoggedIn} />
-                                )}
-                              />
-                              <Route
-                                path={"/day-trips/:tripId"}
-                                render={props => (
-                                  <TripView
-                                    {...props}
-                                    handleLogout={this.handleLogout}
-                                    {...this.state}
-                                    loggedInStatus={this.state.isLoggedIn} />
-                                )}
-                              />
-                              <Route
-                                exact
-                                path={"/guide-to-Australia"}
-                                render={props => (
-                                  <AllCities
-                                    {...props}
-                                    handleLogout={this.handleLogout}
-                                    {...this.state}
-                                    loggedInStatus={this.state.isLoggedIn} />
-                                )}
-                              />
-                              <Route
-
-                                path={"/guide-to-Australia/:cityId"}
-                                render={props => (
-                                  <CityView
-                                    {...props}
-                                    handleLogout={this.handleLogout}
-                                    {...this.state}
-                                    loggedInStatus={this.state.isLoggedIn} />
-                                )}
-                              />
-                              <Route
-                                exact
-                                path={"/"}
-                                render={props => (
-                                  <Home
-                                    {...props}
-                                    handleLogin={ this.handleLogin }
-                                    handleLogout={ this.handleLogout }
-                                    loggedInStatus={ this.state.loggedInStatus } />
-                                )}
-                              />
+                              <Switch>
+                                <Route
+                                  exact
+                                  path={"/routes"}
+                                  render={props => (
+                                    <AllRoutes
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  path={"/routes/:routeId"}
+                                  render={props => (
+                                    <RouteView
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  path={"/timetables/:routeId"}
+                                  render={props => (
+                                    <TimeTable
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  exact
+                                  path={"/day-trips"}
+                                  render={props => (
+                                    <AllTrips
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  path={"/day-trips/:tripId"}
+                                  render={props => (
+                                    <TripView
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  exact
+                                  path={"/guide-to-Australia"}
+                                  render={props => (
+                                    <AllCities
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  path={"/guide-to-Australia/:cityId"}
+                                  render={props => (
+                                    <CityView
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  exact
+                                  path={"/registration"}
+                                  render={props => (
+                                    <Registration
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  exact
+                                  path={"/log-in"}
+                                  render={props => (
+                                    <Login
+                                      {...props}
+                                      handleLogout={this.handleLogout}
+                                      {...this.state}
+                                      loggedInStatus={this.state.isLoggedIn}
+                                    />
+                                  )}
+                                />
+                                <Route
+                                  exact
+                                  path={"/"}
+                                  render={props => (
+                                    <Home
+                                      {...props}
+                                      handleLogin={ this.handleLogin }
+                                      handleLogout={ this.handleLogout }
+                                      loggedInStatus={ this.state.loggedInStatus }
+                                    />
+                                  )}
+                                />
                             </Switch>
                           </Container>
+                          <div class="container-xl">
+                            <footer className="footer-copyright text-center py-3">© 2020 Copyright: CAROLLIU</footer>
+                          </div>
                         </Router>
                     </div>
                 </div>

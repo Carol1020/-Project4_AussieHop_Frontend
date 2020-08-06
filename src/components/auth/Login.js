@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 class Login extends Component {
   constructor(props) {
@@ -46,29 +48,42 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={ this.handleSubmit }>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={this.handleChange}
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={this.state.password}
-          onChange={this.handleChange}
-          required
-        />
-
-        <button type="submit">Log In</button>
-        </form>
-      </div>
+      <div className='row justify-content-md-center'>
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h2 className = "center">Log In</h2>
+                <form onSubmit={ this.handleSubmit }>
+                  <div className="form-group">
+                    <label>Email</label>
+                    <input
+                      className="form-control"
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label >Password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </div>
+                  <Link to="/" className="btn btn-primary float-right">Log In</Link>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
     );
   }
 }

@@ -7,7 +7,6 @@ import { Card, CardColumns, Container } from 'react-bootstrap';
 
 
 
-
 const AllRoutes = function () {
 
   const [routes, setRoutes] = useState([]);
@@ -31,7 +30,7 @@ const AllRoutes = function () {
 
   return (
     <Container fluid="xl">
-      <h1>Bus Routes</h1>
+      <h1 className="text-center">Bus Routes</h1>
       <CardColumns>
       {
         routes.map(route => {

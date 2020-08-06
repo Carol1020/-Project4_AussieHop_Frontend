@@ -30,12 +30,12 @@ const RouteView = function (props) {
   if (!route || !route.stops) return ""
   return (
       <Container key={ id } fluid="xl">
+        <h1 className="text-center">{ start }-{ end } { stops[0].stopType }</h1>
         <Row>
           <Col xs={12} md={8}>
             <Image src={ image } alt="route" fluid rounded />
           </Col>
           <Col xs={6} md={4}>
-            <h3>{ start }-{ end } { stops[0].stopType }</h3>
             <p>From: { start }</p>
             <p>To: { end }</p>
             <p>Number of Stops: { numOfStops }</p>
