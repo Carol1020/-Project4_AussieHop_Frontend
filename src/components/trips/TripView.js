@@ -30,7 +30,7 @@ const TripView = function (props) {
       <p>From: { stops[0].name }</p>
       <p>Duration: { durationInHours }hours</p>
       <p>Price: ${ price }</p>
-      <button type="button" onClick={ trip.handleClick }>BOOK NOW</button>
+      <button className='btn btn-info' type="button">BOOK NOW!</button>
     </div>
   );
 };

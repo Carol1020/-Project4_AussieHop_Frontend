@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import SearchResults from 'react-filter-search';
 import { Link } from 'react-router-dom';
+import Table from 'react-bootstrap/Table'
 
 
 const Timetable = function (props) {
@@ -31,20 +32,36 @@ const Timetable = function (props) {
 
   return (
     <div key={ id }>
-      <div className="timetable">
+      <h1>Bus Timetable from { stops[0].name } to { stops[stops.length-1].name }</h1>
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+          </tr>
+        </thead>
+        <tbody>
         { stops.map(stop => (
-          <div key={ stop.id }>
-            <p>{ stop.name }</p>
-            { direction === "North - South"
-              ? `Arrive at: ${ stop.arrivalTimeS }, Leave at: ${ stop.departureTimeS }`
-              : `Arrive at: ${ stop.arrivalTimeN }, Leave at: ${ stop.departureTimeN }`
-            }
-          </div>
-        )) }
-      </div>
-      <div className="backbtn">
-        <Link to={`/routes/${id}`}>Back</Link>
-      </div>
+          <tr key={ stop.id }>
+            <td>{ stop.name }</td>
+            <td>
+              { direction === "North - South"
+                ? `${ stop.departureTimeS }`
+                : `Arrive at: ${ stop.departureTimeN }`
+              }
+            </td>
+            <td>
+              { direction === "North - South"
+                ? `${ stop.arrivalTimeS }`
+                : `${ stop.arrivalTimeN }`
+              }
+            </td>
+          </tr>
+          )) }
+        </tbody>
+      </Table>
+      <Link to={`/routes/${id}`} className='btn btn-light'>BACK</Link>
     </div>
   );
 };

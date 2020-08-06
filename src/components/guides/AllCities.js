@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import SearchResults from 'react-filter-search';
 import { Link } from 'react-router-dom';
+import { Accordion, Card, useAccordionToggle } from 'react-bootstrap'
+import CityView from "./CityView"
+
 
 
 const AllCities = function () {
@@ -12,7 +15,7 @@ const AllCities = function () {
   useEffect( () => {
     axios.get("http://localhost:3001/stops")
       .then(response => {
-        console.log(response);
+        console.log(response.data);
         setCities(response.data);
       })
       .catch(error => {
@@ -20,15 +23,24 @@ const AllCities = function () {
       })
   }, []) // fetch data only once
 
+
   return (
     <div>
-      <h1>Cities in Australia East Coast</h1>
+      <h1>Our Destinations</h1>
       {
         cities.map(city => {
-          const { id, name } = city
+          const { id, name, description } = city
           return <div key={ id }>
-            {/* cities should be shown once */}
-            <Link to={`/guide-to-Australia/${id}`}>{ name }</Link>
+            <Accordion defaultActiveKey="1">
+              <Card>
+                <Accordion.Toggle as={Card.Header} eventKey="0" className="bg-info text-white">
+                  { name }
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>{ description }</Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
           </div>
         })
       }

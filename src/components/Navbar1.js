@@ -1,78 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     useParams
   } from "react-router-dom";
-import axios from 'axios';
-import SearchResults from 'react-filter-search';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Home from "./Home";
-import AllRoutes from "./routes/AllRoutes";
-import RouteView from "./routes/RouteView";
-import TimeTable from "./routes/TimeTable";
-import AllTrips from "./trips/AllTrips";
-import TripView from "./trips/TripView";
-import AllCities from "./guides/AllCities";
-import CityView from "./guides/CityView";
+  import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
+  import 'bootstrap/dist/css/bootstrap.min.css'
+  import Home from "./Home";
+  import AllRoutes from "./routes/AllRoutes";
+  import RouteView from "./routes/RouteView";
+  import TimeTable from "./routes/TimeTable";
+  import AllTrips from "./trips/AllTrips";
+  import TripView from "./trips/TripView";
+  import AllCities from "./guides/AllCities";
+  import CityView from "./guides/CityView";
 
 
 
-class App extends Component {
-  constructor() {
-    super();
+class Navbar1 extends React.Component{
 
-    this.state = {
-      loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
-    }
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-  };
-
-  checkLoginStatus() {
-    axios.get("http://localhost:3001/logged_in", { withCredentials: true }).then(response => {
-      console.log("logged in?", response);
-      if(response.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN") {
-        this.setState({
-          loggedInStatus: "LOGGED_IN",
-          user: response.data.user
-        })
-      } else if (!response.data.logged_in && this.state.loggedInStatus === "LOGGED_IN") {
-        this.setState({
-          loggedInStatus: "NOT_LOGGED_IN",
-          user: {}
-        })
-      }
-    }).catch(error => {
-      console.log("check login error", error);
-    })
-  }
-
-  componentDidMount() {
-    this.checkLoginStatus();
-  }
-
-
-  handleLogin(data) {
-    console.log(data)
-    this.setState({
-      loggedInStatus: "LOGGED_IN",
-      user: data.user
-    })
-  }
-
-  handleLogout(){
-    this.setState({
-      loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
-    })
-  }
-
-  render() {
-
+    render(){
         return(
             <div>
                 <div className="row">
@@ -87,17 +35,17 @@ class App extends Component {
                                     <Nav.Link href="/routes">Tickets & Buses</Nav.Link>
                                     <Nav.Link href="/day-trips">Day Trips</Nav.Link>
                                     <NavDropdown title="Guide to Australia" id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="/guide-to-Australia">Our Destinations</NavDropdown.Item>
+                                        <NavDropdown.Item href="/guide-to-Australia">All Cities</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/https://theculturetrip.com/pacific/australia/darwin/">Darwin</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/cairns/">Cairns</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/airlie-beach/">Airlie Beach</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/sunshine-coast/">Sunshine Coast</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/brisbane/">Brisbane</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/gold-coast/">Gold Coast</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/byron-bay/">Byron Bay</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/sydney/">Sydney</NavDropdown.Item>
-                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/melbourne/">Melbourne</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.2">Darwin</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.3">Cairns</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.4">Airlie Beach</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.5">Sunshine Coast</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.6">Brisbane</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.7">Gold Coast</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.8">Byron Bay</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.9">Sydney</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.10">Melbourne</NavDropdown.Item>
                                     </NavDropdown>
                                     </Nav>
                                     <Form inline>
@@ -107,7 +55,6 @@ class App extends Component {
                                 </Navbar.Collapse>
                             </Navbar>
                             <br />
-                            <Container fluid="xl">
                             <Switch>
                               <Route
                                 exact
@@ -195,17 +142,12 @@ class App extends Component {
                                 )}
                               />
                             </Switch>
-                          </Container>
                         </Router>
                     </div>
                 </div>
             </div>
         )
     }
-
 }
 
-
-
-
-export default App;
+export default Navbar1;

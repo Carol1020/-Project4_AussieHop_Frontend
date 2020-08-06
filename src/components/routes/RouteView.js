@@ -4,6 +4,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import SearchResults from 'react-filter-search';
 import { Link } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Image from 'react-bootstrap/Image';
 
 
 const RouteView = function (props) {
@@ -25,18 +29,26 @@ const RouteView = function (props) {
   const { id, image, start, end, stops, numOfStops, durationInDays, price } = route
   if (!route || !route.stops) return ""
   return (
-    <div key={ id }>
-      <h3>{ start }-{ end } { stops[0].stopType }</h3>
-      <img src={ image } alt="route" />
-      <p>From: { start }</p>
-      <p>To: { end }</p>
-      <p>Number of Stops: { numOfStops }</p>
-      <p>Minimum time: { durationInDays } Days</p>
-      <p>Price: ${ price }</p>
-      <p>Trip Type: { stops[0].stopType }</p>
-      <Link to={`/timetables/${id}`}>Bus Timetable</Link>
-      <button type="button" onClick={ route.handleClick }>BOOK NOW</button>
-    </div>
+      <Container key={ id } fluid="xl">
+        <Row>
+          <Col xs={12} md={8}>
+            <Image src={ image } alt="route" fluid rounded />
+          </Col>
+          <Col xs={6} md={4}>
+            <h3>{ start }-{ end } { stops[0].stopType }</h3>
+            <p>From: { start }</p>
+            <p>To: { end }</p>
+            <p>Number of Stops: { numOfStops }</p>
+            <p>Minimum time: { durationInDays } Days</p>
+            <p>Price: ${ price }</p>
+            <p>Trip Type: { stops[0].stopType }</p>
+            <Link to={`/timetables/${id}`} className='btn btn-info'>BOOK NOW!</Link>{' '}
+            <Link to={`/timetables/${id}`} className='btn btn-light'>BUS TIMETABLE</Link>{' '}
+            <Link to={'/routes'} className='btn btn-light'>BACK</Link>
+          </Col>
+        </Row>
+      </Container>
+
   );
 };
 
