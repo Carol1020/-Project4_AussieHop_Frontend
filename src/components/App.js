@@ -4,11 +4,11 @@ import axios from 'axios';
 import Home from "./Home";
 import AllRoutes from "./routes/AllRoutes";
 import RouteView from "./routes/RouteView";
+import TimeTable from "./routes/TimeTable";
 import AllTrips from "./trips/AllTrips";
 import TripView from "./trips/TripView";
 import AllCities from "./guides/AllCities";
 import CityView from "./guides/CityView";
-import Cart from "./carts/Cart";
 
 
 
@@ -106,7 +106,7 @@ class App extends Component {
               )}
             />
             <Route
-              path={"/route/:routeId"}
+              path={"/routes/:routeId"}
               render={props => (
                 <RouteView
                   {...props}
@@ -116,6 +116,17 @@ class App extends Component {
               )}
             />
             <Route
+              path={"/timetables/:routeId"}
+              render={props => (
+                <TimeTable
+                  {...props}
+                  handleLogout={this.handleLogout}
+                  {...this.state}
+                  loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            <Route
+              exact
               path={"/day-trips"}
               render={props => (
                 <AllTrips
@@ -147,21 +158,10 @@ class App extends Component {
               )}
             />
             <Route
-              exact
+
               path={"/guide-to-Australia/:cityId"}
               render={props => (
                 <CityView
-                  {...props}
-                  handleLogout={this.handleLogout}
-                  {...this.state}
-                  loggedInStatus={this.state.isLoggedIn} />
-              )}
-            />
-            <Route
-              exact
-              path={"/my-cart"}
-              render={props => (
-                <Cart
                   {...props}
                   handleLogout={this.handleLogout}
                   {...this.state}

@@ -37,7 +37,7 @@ const AllTrips = function () {
             <p>From: { stops[0].name }</p>
             <p>Duration: { durationInHours }hours</p>
             <p>Price: ${ price }</p>
-            <Link to={`/all-trips/${id}`}>MORE INFO</Link>
+            <Link to={`/day-trips/${id}`}>MORE INFO</Link>
             <button type="button" onClick={ handleClick }>BOOK NOW</button>
           </div>
         })

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import _, { uniq } from 'underscore';
 import axios from 'axios';
 // import SearchResults from 'react-filter-search';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const RouteView = function (props) {
@@ -34,6 +34,7 @@ const RouteView = function (props) {
       <p>Minimum time: { durationInDays } Days</p>
       <p>Price: ${ price }</p>
       <p>Trip Type: { stops[0].stopType }</p>
+      <Link to={`/timetables/${id}`}>Bus Timetable</Link>
       <button type="button" onClick={ route.handleClick }>BOOK NOW</button>
     </div>
   );

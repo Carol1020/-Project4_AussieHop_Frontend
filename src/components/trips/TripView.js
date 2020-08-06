@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 
 const TripView = function (props) {
   const [trip, setTrip] = useState([]);
-  const tripId = props.match.params.Id
+  const tripId = props.match.params.tripId
 
   useEffect( () => {
     axios.get(`http://localhost:3001/trips/${ tripId }`)
