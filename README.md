@@ -37,6 +37,37 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Technologies
+- react^16.13.1 Hooks
+- 'axios^0.19.2' to fetch data from backend database in Rails
+
+- 'react-filter-search^1.0.11' to allow searching functions
+- 'stripe^8.82.0' for payment testing
+- 'underscore^1.10.2'
+
+Styling:
+  - antd^4.5.2
+  - bootstrap^4.5.1
+  - react-bootstrap^1.3.0
+  - mdbreact^4.27.0
+
+## Components
+1. Home
+2. auth: authentication
+3. routes: tickets and passes
+4. guides: destination/stop information
+5. trips: day trips
+6. images
+7. Footer
+
+## Things to Work On
+1. Authentication
+2. Allow users to see available trips for each route
+3. Use TripAdviser API for City information
+4. Shopping Cart
+5. Use stripe for payment
+6. Filter and sort by for routes and trips
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
