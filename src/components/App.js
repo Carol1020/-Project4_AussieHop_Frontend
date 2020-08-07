@@ -9,6 +9,7 @@ import axios from 'axios';
 import SearchResults from 'react-filter-search';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import "../App.css";
 import Home from "./Home";
 import AllRoutes from "./routes/AllRoutes";
 import RouteView from "./routes/RouteView";
@@ -19,7 +20,7 @@ import AllCities from "./guides/AllCities";
 import CityView from "./guides/CityView";
 import Registration from "./auth/Registration";
 import Login from "./auth/Login";
-
+import Footer from "./Footer";
 
 
 class App extends Component {
@@ -114,7 +115,7 @@ class App extends Component {
                                     <NavDropdown title="Guide to Australia" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/guide-to-Australia">Our Destinations</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/https://theculturetrip.com/pacific/australia/darwin/">Darwin</NavDropdown.Item>
+                                        <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/darwin/">Darwin</NavDropdown.Item>
                                         <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/cairns/">Cairns</NavDropdown.Item>
                                         <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/airlie-beach/">Airlie Beach</NavDropdown.Item>
                                         <NavDropdown.Item href="https://theculturetrip.com/pacific/australia/sunshine-coast/">Sunshine Coast</NavDropdown.Item>
@@ -136,7 +137,7 @@ class App extends Component {
                                 </Navbar.Collapse>
                             </Navbar>
                             <br />
-                            <Container fluid="xl">
+                            <Container fluid="xl" className="mainApp">
                               <Switch>
                                 <Route
                                   exact
@@ -256,10 +257,8 @@ class App extends Component {
                                 />
                             </Switch>
                           </Container>
-                          <div class="container-xl">
-                            <footer className="footer-copyright text-center py-3">© 2020 Copyright: CAROLLIU</footer>
-                          </div>
                         </Router>
+                        <Footer />
                     </div>
                 </div>
             </div>

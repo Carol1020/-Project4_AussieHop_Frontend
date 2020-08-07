@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-// import _, { uniq } from 'underscore';
 import axios from 'axios';
 // import SearchResults from 'react-filter-search';
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 
 const TripView = function (props) {
@@ -30,7 +31,8 @@ const TripView = function (props) {
       <p>From: { stops[0].name }</p>
       <p>Duration: { durationInHours }hours</p>
       <p>Price: ${ price }</p>
-      <button className='btn btn-info' type="button">BOOK NOW!</button>
+      <button className='btn btn-info' type="button">BOOK NOW!</button>{' '}
+      <Link to={`/day-trips`} className='btn btn-light'>BACK</Link>
     </div>
   );
 };

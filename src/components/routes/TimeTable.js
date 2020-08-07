@@ -61,7 +61,7 @@ const Timetable = function (props) {
           )) }
         </tbody>
       </Table>
-      <Link to={`/routes/${id}`} className='btn btn-light'>BACK</Link>
+      <Link to={`/routes/${id}`} className='btn btn-light float-right'>BACK</Link>
     </div>
   );
 };

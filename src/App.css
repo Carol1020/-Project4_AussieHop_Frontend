@@ -37,12 +37,6 @@
   }
 }
 
-footer {
-  padding: 0;
-  margin-top: 2em;
-  border-top: 1px solid black;
-}
-
-h1 {
-  margin-bottom: 5em;
+.mainApp {
+  min-height: 70vh;
 }

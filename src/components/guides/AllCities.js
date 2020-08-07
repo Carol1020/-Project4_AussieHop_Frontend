@@ -34,10 +34,12 @@ const AllCities = function () {
             <Accordion defaultActiveKey="1">
               <Card>
                 <Accordion.Toggle as={Card.Header} eventKey="0" className="bg-info text-white">
-                  { name }
+                  { name.toUpperCase()  }
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
-                  <Card.Body>{ description }</Card.Body>
+                  <Card.Body>
+                    { description }
+                  </Card.Body>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
